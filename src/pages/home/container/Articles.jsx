@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 import ArticleCard from "../../../components/ArticleCard";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../../services/index/posts";
+import { getAllPublicPosts } from "../../../services/index/posts";
 import { toast } from "react-hot-toast";
 import ArticleCardSkeleton from "../../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../../components/ErrorMessage";
@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Articles = () => {
   const { data, isLoading, isError } = useQuery({
-    queryFn: () => getAllPosts("", 1, 6),
+    queryFn: () => getAllPublicPosts("", 1, 6),
     queryKey: ["posts"],
     onError: (error) => {
       toast.error(error.message);

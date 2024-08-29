@@ -35,6 +35,7 @@ const EditPost = () => {
   const [tags, setTags] = useState(null);
   const [postSlug, setPostSlug] = useState(slug);
   const [caption, setCaption] = useState("");
+  const [isPublic, setIsPublic] = useState("");
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost({ slug }),
@@ -44,6 +45,8 @@ const EditPost = () => {
       setCategories(data.categories.map((item) => item._id));
       setTitle(data.title);
       setTags(data.tags);
+      setCaption(data.caption);
+      setIsPublic(data.isPublic);
     },
     refetchOnWindowFocus: false,
   });
@@ -96,7 +99,15 @@ const EditPost = () => {
 
     updatedData.append(
       "document",
-      JSON.stringify({ body, categories, title, tags, slug: postSlug, caption })
+      JSON.stringify({
+        body,
+        categories,
+        title,
+        tags,
+        slug: postSlug,
+        caption,
+        isPublic,
+      })
     );
 
     mutateUpdatePostDetail({
@@ -191,23 +202,22 @@ const EditPost = () => {
               />
             </div>
             <div className="d-form-control w-full">
-              <label className="d-label" htmlFor="slug">
-                <span className="d-label-text">slug</span>
+              <label className="d-label" htmlFor="isPublic">
+                <span className="d-label-text">isPublic</span>
               </label>
               <input
-                id="slug"
-                value={postSlug}
-                className="d-input d-input-bordered border-slate-300 !outline-slate-300 text-xl font-medium font-roboto text-dark-hard"
-                onChange={(e) =>
-                  setPostSlug(e.target.value.replace(/\s+/g, "-").toLowerCase())
-                }
-                placeholder="post slug"
+                id="isPublic"
+                type="checkbox"
+                checked={isPublic}
+                className=""
+                onChange={(e) => setIsPublic(e.target.checked)}
               />
             </div>
             <div className="mb-5 mt-2">
               <label className="d-label">
                 <span className="d-label-text">categories</span>
               </label>
+
               {isPostDataLoaded && (
                 <MultiSelectTagDropdown
                   loadOptions={promiseOptions}
@@ -236,7 +246,7 @@ const EditPost = () => {
                 />
               )}
             </div>
-            <div className="w-full">
+            <div className="w-full ">
               {isPostDataLoaded && (
                 <Editor
                   content={data?.body}

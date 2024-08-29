@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { getAllPosts } from "../../services/index/posts";
+import { getAllPublicPosts } from "../../services/index/posts";
 import ArticleCardSkeleton from "../../components/ArticleCardSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import ArticleCard from "../../components/ArticleCard";
@@ -21,7 +21,7 @@ const BlogPage = () => {
   const searchKeyword = searchParamsValue?.search || "";
 
   const { data, isLoading, isError, isFetching, refetch } = useQuery({
-    queryFn: () => getAllPosts(searchKeyword, currentPage, 12),
+    queryFn: () => getAllPublicPosts(searchKeyword, currentPage, 12),
     queryKey: ["posts"],
     onError: (error) => {
       toast.error(error.message);
