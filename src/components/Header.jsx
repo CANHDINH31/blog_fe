@@ -8,18 +8,8 @@ import { images } from "../constants";
 import { logout } from "../store/actions/user";
 
 const navItemsInfo = [
-  { name: "Home", type: "link", href: "/" },
-  { name: "Blog", type: "link", href: "/blog" },
-  {
-    name: "Pages",
-    type: "dropdown",
-    items: [
-      { title: "About us", href: "/about" },
-      { title: "Contact us", href: "/contact" },
-    ],
-  },
-  { name: "Pricing", type: "link", href: "/pricing" },
-  { name: "Faq", type: "link", href: "/faq" },
+  { name: "Trang chủ", type: "link", href: "/" },
+  { name: "Sản phẩm", type: "link", href: "/blog" },
 ];
 
 const NavItem = ({ item }) => {
@@ -125,7 +115,7 @@ const Header = () => {
                     className="flex gap-x-1 items-center mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
                     onClick={() => setProfileDrowpdown(!profileDrowpdown)}
                   >
-                    <span>Account</span>
+                    <span>Tài khoản</span>
                     <MdKeyboardArrowDown />
                   </button>
                   <div
@@ -140,7 +130,7 @@ const Header = () => {
                           type="button"
                           className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
                         >
-                          Admin Dashboard
+                          Quản lý
                         </button>
                       )}
 
@@ -149,14 +139,14 @@ const Header = () => {
                         type="button"
                         className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
                       >
-                        Profile Page
+                        Cập nhật thông tin
                       </button>
                       <button
                         onClick={logoutHandler}
                         type="button"
                         className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
                       >
-                        Logout
+                        Đăng xuất
                       </button>
                     </ul>
                   </div>
@@ -168,7 +158,7 @@ const Header = () => {
               onClick={() => navigate("/login")}
               className="mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300"
             >
-              Sign in
+              Đăng nhập
             </button>
           )}
         </div>
