@@ -85,7 +85,7 @@ const ProfilePage = () => {
                 htmlFor="name"
                 className="text-[#5a7184] font-semibold block"
               >
-                Name
+                Họ tên
               </label>
               <input
                 type="text"
@@ -93,14 +93,14 @@ const ProfilePage = () => {
                 {...register("name", {
                   minLength: {
                     value: 1,
-                    message: "Name length must be at least 1 character",
+                    message: "Tối thiểu một ký tự",
                   },
                   required: {
                     value: true,
-                    message: "Name is required",
+                    message: "Không được để trống",
                   },
                 })}
-                placeholder="Enter name"
+                placeholder="Nhập họ tên"
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
                   errors.name ? "border-red-500" : "border-[#c3cad9]"
                 }`}
@@ -125,14 +125,14 @@ const ProfilePage = () => {
                   pattern: {
                     value:
                       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: "Enter a valid email",
+                    message: "Email không hợp lệ",
                   },
                   required: {
                     value: true,
-                    message: "Email is required",
+                    message: "Không được để trống",
                   },
                 })}
-                placeholder="Enter email"
+                placeholder="Nhập email"
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
                   errors.email ? "border-red-500" : "border-[#c3cad9]"
                 }`}
@@ -148,13 +148,13 @@ const ProfilePage = () => {
                 htmlFor="password"
                 className="text-[#5a7184] font-semibold block"
               >
-                New Password (optional)
+                Mật khẩu (không bắt buộc)
               </label>
               <input
                 type="password"
                 id="password"
                 {...register("password")}
-                placeholder="Enter new password"
+                placeholder="Nhập mật khẩu"
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border ${
                   errors.password ? "border-red-500" : "border-[#c3cad9]"
                 }`}
@@ -170,7 +170,7 @@ const ProfilePage = () => {
               disabled={!isValid || profileIsLoading || updateProfileIsLoading}
               className="bg-primary text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Update
+              Cập nhật
             </button>
           </form>
         </div>
