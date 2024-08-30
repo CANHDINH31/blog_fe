@@ -71,11 +71,9 @@ export const updateProfilePicture = async ({ token, formData }) => {
   try {
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     };
-
     const { data } = await axios.put(
       "/api/users/updateProfilePicture",
       formData,
