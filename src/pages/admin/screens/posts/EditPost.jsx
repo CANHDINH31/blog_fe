@@ -16,6 +16,7 @@ import {
   categoryToOption,
   filterCategories,
 } from "../../../../utils/multiSelectTagUtils";
+import uploadImgToFirebase from "../../../../utils/uploadImgToFirebase";
 
 const promiseOptions = async (inputValue) => {
   const { data: categoriesData } = await getAllCategories();
@@ -55,9 +56,9 @@ const EditPost = () => {
     mutate: mutateUpdatePostDetail,
     isLoading: isLoadingUpdatePostDetail,
   } = useMutation({
-    mutationFn: ({ updatedData, slug, token }) => {
+    mutationFn: ({ payload, slug, token }) => {
       return updatePost({
-        updatedData,
+        payload,
         slug,
         token,
       });
@@ -79,39 +80,21 @@ const EditPost = () => {
   };
 
   const handleUpdatePost = async () => {
-    let updatedData = new FormData();
+    const img = await uploadImgToFirebase(photo);
 
-    if (!initialPhoto && photo) {
-      updatedData.append("postPicture", photo);
-    } else if (initialPhoto && !photo) {
-      const urlToObject = async (url) => {
-        let reponse = await fetch(url);
-        let blob = await reponse.blob();
-        const file = new File([blob], initialPhoto, { type: blob.type });
-        return file;
-      };
-      const picture = await urlToObject(
-        stables.UPLOAD_FOLDER_BASE_URL + data?.photo
-      );
-
-      updatedData.append("postPicture", picture);
-    }
-
-    updatedData.append(
-      "document",
-      JSON.stringify({
-        body,
-        categories,
-        title,
-        tags,
-        slug: postSlug,
-        caption,
-        isPublic,
-      })
-    );
+    const payload = {
+      photo: img,
+      body,
+      categories,
+      title,
+      tags,
+      slug: postSlug,
+      caption,
+      isPublic,
+    };
 
     mutateUpdatePostDetail({
-      updatedData,
+      payload,
       slug,
       token: userState.userInfo.token,
     });
@@ -144,7 +127,7 @@ const EditPost = () => {
                 />
               ) : initialPhoto ? (
                 <img
-                  src={stables.UPLOAD_FOLDER_BASE_URL + data?.photo}
+                  src={data?.photo}
                   alt={data?.title}
                   className="rounded-xl w-full"
                 />

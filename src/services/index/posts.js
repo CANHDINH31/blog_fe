@@ -58,7 +58,7 @@ export const deletePost = async ({ slug, token }) => {
   }
 };
 
-export const updatePost = async ({ updatedData, slug, token }) => {
+export const updatePost = async ({ payload, slug, token }) => {
   try {
     const config = {
       headers: {
@@ -66,7 +66,7 @@ export const updatePost = async ({ updatedData, slug, token }) => {
       },
     };
 
-    const { data } = await axios.put(`/api/posts/${slug}`, updatedData, config);
+    const { data } = await axios.put(`/api/posts/${slug}`, payload, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
