@@ -5,7 +5,6 @@ import { getSinglePost, updatePost } from "../../../../services/index/posts";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ArticleDetailSkeleton from "../../../articleDetail/components/ArticleDetailSkeleton";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { stables } from "../../../../constants";
 import { HiOutlineCamera } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -34,7 +33,7 @@ const EditPost = () => {
   const [categories, setCategories] = useState(null);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(null);
-  const [postSlug, setPostSlug] = useState(slug);
+  const [postSlug] = useState(slug);
   const [caption, setCaption] = useState("");
   const [isPublic, setIsPublic] = useState("");
 
@@ -80,7 +79,13 @@ const EditPost = () => {
   };
 
   const handleUpdatePost = async () => {
-    const img = await uploadImgToFirebase(photo);
+    let img = "";
+
+    if (photo) {
+      img = await uploadImgToFirebase(photo);
+    } else if (initialPhoto) {
+      img = initialPhoto;
+    }
 
     const payload = {
       photo: img,
