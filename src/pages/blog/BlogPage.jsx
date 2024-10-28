@@ -29,8 +29,6 @@ const BlogPage = () => {
     },
   });
 
-  console.log(data);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     if (isFirstRun) {
@@ -51,12 +49,12 @@ const BlogPage = () => {
 
   return (
     <MainLayout>
-      <section className="flex flex-col container mx-auto px-5 py-10">
+      <section className="container mx-auto flex flex-col px-5 py-10">
         <Search
-          className="w-full max-w-xl mb-10"
+          className="mb-10 w-full max-w-xl"
           onSearchKeyword={handleSearch}
         />
-        <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+        <div className=" flex flex-wrap gap-y-5 pb-10 md:gap-x-5">
           {isLoading || isFetching ? (
             [...Array(3)].map((item, index) => (
               <ArticleCardSkeleton

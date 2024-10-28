@@ -2,7 +2,7 @@ import React from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 
-import { images, stables } from "../constants";
+import { images } from "../constants";
 import { Link } from "react-router-dom";
 
 const ArticleCard = ({ post, className }) => {
@@ -12,11 +12,7 @@ const ArticleCard = ({ post, className }) => {
     >
       <Link to={`/blog/${post.slug}`}>
         <img
-          src={
-            post.photo
-              ? stables.UPLOAD_FOLDER_BASE_URL + post.photo
-              : images.samplePostImage
-          }
+          src={post.photo ? post.photo : images.samplePostImage}
           alt="title"
           className="h-auto w-full object-cover object-center md:h-52 lg:h-48 xl:h-60"
         />
