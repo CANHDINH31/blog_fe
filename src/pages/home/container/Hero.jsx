@@ -1,7 +1,6 @@
 import React from "react";
 
 import { images } from "../../../constants";
-import Search from "../../../components/Search";
 
 const Hero = () => {
   return (
