@@ -5,7 +5,6 @@ import { getSinglePost, updatePost } from "../../../../services/index/posts";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ArticleDetailSkeleton from "../../../articleDetail/components/ArticleDetailSkeleton";
 import ErrorMessage from "../../../../components/ErrorMessage";
-import { stables } from "../../../../constants";
 import { HiOutlineCamera } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -16,6 +15,7 @@ import {
   categoryToOption,
   filterCategories,
 } from "../../../../utils/multiSelectTagUtils";
+import uploadImgToFirebase from "../../../../utils/uploadImgToFirebase";
 
 const promiseOptions = async (inputValue) => {
   const { data: categoriesData } = await getAllCategories();
@@ -33,7 +33,7 @@ const EditPost = () => {
   const [categories, setCategories] = useState(null);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState(null);
-  const [postSlug, setPostSlug] = useState(slug);
+  const [postSlug] = useState(slug);
   const [caption, setCaption] = useState("");
   const [isPublic, setIsPublic] = useState("");
 
@@ -55,9 +55,9 @@ const EditPost = () => {
     mutate: mutateUpdatePostDetail,
     isLoading: isLoadingUpdatePostDetail,
   } = useMutation({
-    mutationFn: ({ updatedData, slug, token }) => {
+    mutationFn: ({ payload, slug, token }) => {
       return updatePost({
-        updatedData,
+        payload,
         slug,
         token,
       });
@@ -79,39 +79,27 @@ const EditPost = () => {
   };
 
   const handleUpdatePost = async () => {
-    let updatedData = new FormData();
+    let img = "";
 
-    if (!initialPhoto && photo) {
-      updatedData.append("postPicture", photo);
-    } else if (initialPhoto && !photo) {
-      const urlToObject = async (url) => {
-        let reponse = await fetch(url);
-        let blob = await reponse.blob();
-        const file = new File([blob], initialPhoto, { type: blob.type });
-        return file;
-      };
-      const picture = await urlToObject(
-        stables.UPLOAD_FOLDER_BASE_URL + data?.photo
-      );
-
-      updatedData.append("postPicture", picture);
+    if (photo) {
+      img = await uploadImgToFirebase(photo);
+    } else if (initialPhoto) {
+      img = initialPhoto;
     }
 
-    updatedData.append(
-      "document",
-      JSON.stringify({
-        body,
-        categories,
-        title,
-        tags,
-        slug: postSlug,
-        caption,
-        isPublic,
-      })
-    );
+    const payload = {
+      photo: img,
+      body,
+      categories,
+      title,
+      tags,
+      slug: postSlug,
+      caption,
+      isPublic,
+    };
 
     mutateUpdatePostDetail({
-      updatedData,
+      payload,
       slug,
       token: userState.userInfo.token,
     });
@@ -144,7 +132,7 @@ const EditPost = () => {
                 />
               ) : initialPhoto ? (
                 <img
-                  src={stables.UPLOAD_FOLDER_BASE_URL + data?.photo}
+                  src={data?.photo}
                   alt={data?.title}
                   className="rounded-xl w-full"
                 />

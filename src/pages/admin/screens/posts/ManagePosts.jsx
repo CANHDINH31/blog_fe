@@ -1,7 +1,5 @@
 import { images, stables } from "../../../../constants";
 import { deletePost, getAllPosts } from "../../../../services/index/posts";
-import Pagination from "../../../../components/Pagination";
-import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
@@ -15,7 +13,6 @@ const ManagePosts = () => {
     isLoading,
     isFetching,
     isLoadingDeleteData,
-    queryClient,
     searchKeywordHandler,
     submitSearchKeywordHandler,
     deleteDataHandler,
@@ -40,7 +37,7 @@ const ManagePosts = () => {
       searchKeywordOnSubmitHandler={submitSearchKeywordHandler}
       searchKeywordOnChangeHandler={searchKeywordHandler}
       searchKeyword={searchKeyword}
-      tableHeaderTitleList={["Title", "Category", "Created At", "Tags", ""]}
+      tableHeaderTitleList={["Title", "Category", "public", "Tags", ""]}
       isLoading={isLoading}
       isFetching={isFetching}
       data={postsData?.data}
@@ -56,11 +53,7 @@ const ManagePosts = () => {
               <div className="flex-shrink-0">
                 <a href="/" className="relative block">
                   <img
-                    src={
-                      post?.photo
-                        ? stables.UPLOAD_FOLDER_BASE_URL + post?.photo
-                        : images.samplePostImage
-                    }
+                    src={post?.photo ? post?.photo : images.samplePostImage}
                     alt={post.title}
                     className="mx-auto object-cover rounded-lg w-10 aspect-square"
                   />
@@ -88,13 +81,15 @@ const ManagePosts = () => {
             </p>
           </td>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
-            <p className="text-gray-900 whitespace-no-wrap">
-              {new Date(post.createdAt).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
-            </p>
+            {post.isPublic ? (
+              <p className="text-green-600 hover:text-green-900  disabled:opacity-70 disabled:cursor-not-allowed">
+                true
+              </p>
+            ) : (
+              <p className="text-red-600 hover:text-red-900 disabled:opacity-70 disabled:cursor-not-allowed">
+                false
+              </p>
+            )}
           </td>
           <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
             <div className="flex gap-x-2">
