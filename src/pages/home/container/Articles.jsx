@@ -20,8 +20,8 @@ const Articles = () => {
   });
 
   return (
-    <section className="flex flex-col container mx-auto px-5 py-10">
-      <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+    <section className="container mx-auto flex flex-col px-5 py-10">
+      <div className=" flex flex-wrap gap-y-5 pb-10 md:gap-x-5">
         {isLoading ? (
           [...Array(3)].map((item, index) => (
             <ArticleCardSkeleton
@@ -43,10 +43,10 @@ const Articles = () => {
       </div>
       <Link
         to="/blog"
-        className="mx-auto flex items-center gap-x-2 font-bold text-primary border-2 border-primary px-6 py-3 rounded-lg"
+        className="mx-auto flex items-center gap-x-2 rounded-lg border-2 border-primary px-6 py-3 font-bold text-primary"
       >
-        <span>More articles</span>
-        <FaArrowRight className="w-3 h-3" />
+        <span>Xem thêm</span>
+        <FaArrowRight className="h-3 w-3" />
       </Link>
     </section>
   );

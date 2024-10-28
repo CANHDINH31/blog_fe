@@ -1,41 +1,18 @@
 import React from "react";
-import {
-  FaFacebookSquare,
-  FaTwitterSquare,
-  FaRedditSquare,
-  FaWhatsappSquare,
-} from "react-icons/fa";
+import { FaFacebookSquare, FaWhatsappSquare } from "react-icons/fa";
 
 const SocialShareButtons = ({ url, title }) => {
   return (
-    <div className="w-full flex justify-between">
+    <div className="flex w-full">
       <a
         target="_blank"
         rel="noreferrer"
-        href={`https://www.facebook.com/dialog/share?app_id=1180206992856877&display=popup&href=${url}`}
+        href={`https://www.facebook.com/qdat.0410`}
       >
-        <FaFacebookSquare className="text-[#3b5998] w-12 h-auto" />
+        <FaFacebookSquare className="h-auto w-12 text-[#3b5998]" />
       </a>
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`https://twitter.com/intent/tweet?url=${url}`}
-      >
-        <FaTwitterSquare className="text-[#00acee] w-12 h-auto" />
-      </a>
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`http://www.reddit.com/submit?url=${url}&title=${title}`}
-      >
-        <FaRedditSquare className="text-[#ff4500] w-12 h-auto" />
-      </a>
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`https://api.whatsapp.com/send/?text=${url}`}
-      >
-        <FaWhatsappSquare className="text-[#25D366] w-12 h-auto" />
+      <a target="_blank" rel="noreferrer" href={`https://zalo.me/0832834994`}>
+        <FaWhatsappSquare className="h-auto w-12 text-[#25D366]" />
       </a>
     </div>
   );
