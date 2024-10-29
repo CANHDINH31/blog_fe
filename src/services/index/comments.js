@@ -1,4 +1,4 @@
-import axios from "axios";
+import { request } from "./request";
 
 export const createNewComment = async ({
   token,
@@ -14,7 +14,7 @@ export const createNewComment = async ({
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await request.post(
       "/api/comments",
       {
         desc,
@@ -40,7 +40,7 @@ export const updateComment = async ({ token, desc, check, commentId }) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await request.put(
       `/api/comments/${commentId}`,
       {
         desc,
@@ -64,7 +64,7 @@ export const deleteComment = async ({ token, commentId }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/comments/${commentId}`, config);
+    const { data } = await request.delete(`/api/comments/${commentId}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -86,7 +86,7 @@ export const getAllComments = async (
       },
     };
 
-    const { data, headers } = await axios.get(
+    const { data, headers } = await request.get(
       `/api/comments?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
       config
     );

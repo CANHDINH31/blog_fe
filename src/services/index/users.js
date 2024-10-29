@@ -1,8 +1,8 @@
-import axios from "axios";
+import { request } from "./request";
 
 export const signup = async ({ name, email, password }) => {
   try {
-    const { data } = await axios.post("/api/users/register", {
+    const { data } = await request.post("/api/users/register", {
       name,
       email,
       password,
@@ -17,7 +17,7 @@ export const signup = async ({ name, email, password }) => {
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await axios.post("/api/users/login", {
+    const { data } = await request.post("/api/users/login", {
       email,
       password,
     });
@@ -37,7 +37,7 @@ export const getUserProfile = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.get("/api/users/profile", config);
+    const { data } = await request.get("/api/users/profile", config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -54,7 +54,7 @@ export const updateProfile = async ({ token, userData, userId }) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await request.put(
       `/api/users/updateProfile/${userId}`,
       userData,
       config
@@ -74,7 +74,7 @@ export const updateProfilePicture = async ({ token, formData }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await axios.put(
+    const { data } = await request.put(
       "/api/users/updateProfilePicture",
       formData,
       config
@@ -100,7 +100,7 @@ export const getAllUsers = async (
       },
     };
 
-    const { data, headers } = await axios.get(
+    const { data, headers } = await request.get(
       `/api/users?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`,
       config
     );
@@ -120,7 +120,7 @@ export const deleteUser = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/users/${slug}`, config);
+    const { data } = await request.delete(`/api/users/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

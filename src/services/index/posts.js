@@ -1,4 +1,4 @@
-import axios from "axios";
+import { request } from "./request";
 
 export const getAllPublicPosts = async (
   searchKeyword = "",
@@ -6,7 +6,7 @@ export const getAllPublicPosts = async (
   limit = 10
 ) => {
   try {
-    const { data, headers } = await axios.get(
+    const { data, headers } = await request.get(
       `/api/posts/public?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
@@ -19,7 +19,7 @@ export const getAllPublicPosts = async (
 
 export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
   try {
-    const { data, headers } = await axios.get(
+    const { data, headers } = await request.get(
       `/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
@@ -32,7 +32,7 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
 
 export const getSinglePost = async ({ slug }) => {
   try {
-    const { data } = await axios.get(`/api/posts/${slug}`);
+    const { data } = await request.get(`/api/posts/${slug}`);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -49,7 +49,7 @@ export const deletePost = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/posts/${slug}`, config);
+    const { data } = await request.delete(`/api/posts/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -66,7 +66,7 @@ export const updatePost = async ({ payload, slug, token }) => {
       },
     };
 
-    const { data } = await axios.put(`/api/posts/${slug}`, payload, config);
+    const { data } = await request.put(`/api/posts/${slug}`, payload, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
@@ -83,7 +83,7 @@ export const createPost = async ({ token }) => {
       },
     };
 
-    const { data } = await axios.post(`/api/posts`, {}, config);
+    const { data } = await request.post(`/api/posts`, {}, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)
