@@ -11,7 +11,7 @@ const SocialShareButtons = ({ url, title }) => {
       >
         <FaFacebookSquare className="h-auto w-12 text-[#3b5998]" />
       </a>
-      <a target="_blank" rel="noreferrer" href={`https://zalo.me/0397677583`}>
+      <a target="_blank" rel="noreferrer" href={`https://zalo.me/03976775834`}>
         <FaWhatsappSquare className="h-auto w-12 text-[#25D366]" />
       </a>
       <a
