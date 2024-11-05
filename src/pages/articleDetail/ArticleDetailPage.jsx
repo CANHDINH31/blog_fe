@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
 import BreadCrumbs from "../../components/BreadCrumbs";
 import CommentsContainer from "../../components/comments/CommentsContainer";
 import MainLayout from "../../components/MainLayout";
 import SocialShareButtons from "../../components/SocialShareButtons";
-import { images, stables } from "../../constants";
+import { images } from "../../constants";
 import SuggestedPosts from "./container/SuggestedPosts";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getAllPosts,
-  getAllPublicPosts,
-  getSinglePost,
-} from "../../services/index/posts";
+import { getAllPublicPosts, getSinglePost } from "../../services/index/posts";
 import ArticleDetailSkeleton from "./components/ArticleDetailSkeleton";
 import ErrorMessage from "../../components/ErrorMessage";
 import { useSelector } from "react-redux";
@@ -30,9 +25,9 @@ const ArticleDetailPage = () => {
     queryKey: ["blog", slug],
     onSuccess: (data) => {
       setbreadCrumbsData([
-        { name: "Home", link: "/" },
-        { name: "Blog", link: "/blog" },
-        { name: "Article title", link: `/blog/${data.slug}` },
+        { name: "Trang chủ", link: "/" },
+        { name: "Sản phẩm", link: "/blog" },
+        { name: "Chi tiết sản phẩm", link: `/blog/${data.slug}` },
       ]);
       setBody(parseJsonToHtml(data?.body));
     },
@@ -89,14 +84,14 @@ const ArticleDetailPage = () => {
           </article>
           <div>
             <SuggestedPosts
-              header="Latest Article"
+              header="Sản phẩm gần nhất"
               posts={postsData?.data}
               tags={data?.tags}
               className="mt-8 lg:mt-0 lg:max-w-xs"
             />
             <div className="mt-7">
               <h2 className="mb-4 font-roboto font-medium text-dark-hard md:text-xl">
-                Contact us:
+                Liên hệ với chúng tôi:
               </h2>
               <SocialShareButtons
                 url={encodeURI(window.location.href)}
