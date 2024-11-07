@@ -19,9 +19,9 @@ const CommentForm = ({
     <form onSubmit={submitHandler}>
       <div className="flex flex-col items-end border border-primary rounded-lg p-4">
         <textarea
-          className="w-full focus:outline-none bg-transparent"
+          className="w-full resize-none focus:outline-none bg-transparent"
           rows="5"
-          placeholder="Leave your comment here..."
+          placeholder="Viết bình luận tại đây..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

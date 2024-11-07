@@ -66,6 +66,9 @@ const CommentsContainer = ({
   });
 
   const addCommentHandler = (value, parent = null, replyOnUser = null) => {
+    if (!userState?.userInfo?.token) {
+      return toast.error("Đăng nhập để bình luận");
+    }
     mutateNewComment({
       desc: value,
       parent,
