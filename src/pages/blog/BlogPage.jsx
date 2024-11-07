@@ -19,9 +19,11 @@ const BlogPage = () => {
 
   const currentPage = parseInt(searchParamsValue?.page) || 1;
   const searchKeyword = searchParamsValue?.search || "";
+  const categoryKeyword = searchParamsValue?.category || "";
 
   const { data, isLoading, isError, isFetching, refetch } = useQuery({
-    queryFn: () => getAllPublicPosts(searchKeyword, currentPage, 12),
+    queryFn: () =>
+      getAllPublicPosts(searchKeyword, currentPage, 12, categoryKeyword),
     queryKey: ["posts"],
     onError: (error) => {
       toast.error(error.message);
@@ -36,15 +38,14 @@ const BlogPage = () => {
       return;
     }
     refetch();
-  }, [currentPage, searchKeyword, refetch]);
+  }, [currentPage, searchKeyword, categoryKeyword, refetch]);
 
   const handlePageChange = (page) => {
-    // change the page's query string in the URL
-    setSearchParams({ page, search: searchKeyword });
+    setSearchParams({ page, search: searchKeyword, category: categoryKeyword });
   };
 
-  const handleSearch = ({ searchKeyword }) => {
-    setSearchParams({ page: 1, search: searchKeyword });
+  const handleSearch = ({ searchKeyword, category }) => {
+    setSearchParams({ page: 1, search: searchKeyword, category: category });
   };
 
   return (

@@ -3,11 +3,12 @@ import { request } from "./request";
 export const getAllPublicPosts = async (
   searchKeyword = "",
   page = 1,
-  limit = 10
+  limit = 10,
+  categoryKeyword = ""
 ) => {
   try {
     const { data, headers } = await request.get(
-      `/api/posts/public?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
+      `/api/posts/public?searchKeyword=${searchKeyword}&categoryKeyword=${categoryKeyword}&page=${page}&limit=${limit}`
     );
     return { data, headers };
   } catch (error) {
