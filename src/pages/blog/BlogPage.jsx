@@ -66,7 +66,16 @@ const BlogPage = () => {
           ) : isError ? (
             <ErrorMessage message="Couldn't fetch the posts data" />
           ) : data?.data.length === 0 ? (
-            <p className="text-orange-500">No Posts Found!</p>
+            <div className="flex flex-col items-center justify-center w-full">
+              <img
+                src={"/images/NotFound.png"}
+                alt="not-found"
+                className="w-1/2 max-w-xs mb-4"
+              />
+              <p className="text-lg text-orange-500 font-semibold">
+                Không có kết quả nào!
+              </p>
+            </div>
           ) : (
             data?.data.map((post) => (
               <ArticleCard
