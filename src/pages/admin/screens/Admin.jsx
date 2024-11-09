@@ -1,7 +1,11 @@
 const Admin = () => {
   return (
     <div>
-      <img src="/images/AdminBanner.jpg" alt="banner" />
+      <img
+        className="block w-full rounded-md"
+        src="/images/AdminBanner.png"
+        alt="banner"
+      />
     </div>
   );
 };
