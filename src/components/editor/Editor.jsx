@@ -23,7 +23,7 @@ const Editor = ({ onDataChange, content, editable }) => {
   return (
     <div className="z-0 w-full">
       {editable && <MenuBar editor={editor} />}
-      <div className="mt-1 rounded border border-gray-300 p-4">
+      <div className="mt-1 rounded border border-gray-300 bg-white p-4">
         <EditorContent editor={editor} placeholder="Nhập nội dung ..." />
       </div>
     </div>
