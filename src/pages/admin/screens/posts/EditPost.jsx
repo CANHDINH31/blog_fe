@@ -121,24 +121,24 @@ const EditPost = () => {
       ) : isError ? (
         <ErrorMessage message="Couldn't fetch the post detail" />
       ) : (
-        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
+        <section className="container mx-auto flex max-w-5xl flex-col px-5 py-5 lg:flex-row lg:items-start lg:gap-x-5">
           <article className="flex-1">
             <label htmlFor="postPicture" className="w-full cursor-pointer">
               {photo ? (
                 <img
                   src={URL.createObjectURL(photo)}
                   alt={data?.title}
-                  className="rounded-xl w-full"
+                  className="w-full rounded-xl"
                 />
               ) : initialPhoto ? (
                 <img
                   src={data?.photo}
                   alt={data?.title}
-                  className="rounded-xl w-full"
+                  className="w-full rounded-xl"
                 />
               ) : (
-                <div className="w-full min-h-[200px] bg-blue-50/50 flex justify-center items-center">
-                  <HiOutlineCamera className="w-7 h-auto text-primary" />
+                <div className="flex min-h-[200px] w-full items-center justify-center bg-blue-50/50">
+                  <HiOutlineCamera className="h-auto w-7 text-primary" />
                 </div>
               )}
             </label>
@@ -151,15 +151,15 @@ const EditPost = () => {
             <button
               type="button"
               onClick={handleDeleteImage}
-              className="w-fit bg-red-500 text-sm text-white font-semibold rounded-lg px-2 py-1 mt-5"
+              className="mt-5 w-fit rounded-lg bg-red-500 px-2 py-1 text-sm font-semibold text-white"
             >
-              Delete Image
+              Xóa ảnh
             </button>
             <div className="mt-4 flex gap-2">
               {data?.categories.map((category) => (
                 <Link
                   to={`/blog?category=${category.name}`}
-                  className="text-primary text-sm font-roboto inline-block md:text-base"
+                  className="inline-block font-roboto text-sm text-primary md:text-base"
                 >
                   {category.name}
                 </Link>
@@ -167,31 +167,31 @@ const EditPost = () => {
             </div>
             <div className="d-form-control w-full">
               <label className="d-label" htmlFor="title">
-                <span className="d-label-text">Title</span>
+                <span className="d-label-text">Tiêu đề</span>
               </label>
               <input
                 id="title"
                 value={title}
-                className="d-input d-input-bordered border-slate-300 !outline-slate-300 text-xl font-medium font-roboto text-dark-hard"
+                className="d-input-bordered d-input border-slate-300 font-roboto text-xl font-medium text-dark-hard !outline-slate-300"
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="title"
+                placeholder="Nhập tiêu đề"
               />
             </div>
             <div className="d-form-control w-full">
               <label className="d-label" htmlFor="caption">
-                <span className="d-label-text">caption</span>
+                <span className="d-label-text">Phụ đề</span>
               </label>
               <input
                 id="caption"
                 value={caption}
-                className="d-input d-input-bordered border-slate-300 !outline-slate-300 text-xl font-medium font-roboto text-dark-hard"
+                className="d-input-bordered d-input border-slate-300 font-roboto text-xl font-medium text-dark-hard !outline-slate-300"
                 onChange={(e) => setCaption(e.target.value)}
-                placeholder="caption"
+                placeholder="Nhập phụ đề"
               />
             </div>
-            <div className="d-form-control w-full">
+            <div className="d-form-control mb-5 mt-2 w-full">
               <label className="d-label" htmlFor="isPublic">
-                <span className="d-label-text">isPublic</span>
+                <span className="d-label-text">Công khai</span>
               </label>
               <input
                 id="isPublic"
@@ -203,7 +203,7 @@ const EditPost = () => {
             </div>
             <div className="mb-5 mt-2">
               <label className="d-label">
-                <span className="d-label-text">categories</span>
+                <span className="d-label-text">Danh mục</span>
               </label>
 
               {isPostDataLoaded && (
@@ -218,7 +218,7 @@ const EditPost = () => {
             </div>
             <div className="mb-5 mt-2">
               <label className="d-label">
-                <span className="d-label-text">tags</span>
+                <span className="d-label-text">Tags</span>
               </label>
               {isPostDataLoaded && (
                 <CreatableSelect
@@ -249,9 +249,9 @@ const EditPost = () => {
               disabled={isLoadingUpdatePostDetail}
               type="button"
               onClick={handleUpdatePost}
-              className="w-full bg-green-500 text-white font-semibold rounded-lg px-4 py-2 disabled:cursor-not-allowed disabled:opacity-70"
+              className="mt-2 w-full rounded-lg bg-green-500 px-4 py-2 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Update Post
+              Cập nhật
             </button>
           </article>
         </section>

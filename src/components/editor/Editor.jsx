@@ -10,7 +10,7 @@ const Editor = ({ onDataChange, content, editable }) => {
     editorProps: {
       attributes: {
         class:
-          "!prose !dark:prose-invert prose-sm sm:prose-base max-w-none mt-7 focus:outline-none prose-pre:bg-[#282c34] prose-pre:text-[#abb2bf]",
+          "pb-20 !prose !dark:prose-invert prose-sm sm:prose-base max-w-none focus:outline-none prose-pre:bg-[#282c34] prose-pre:text-[#abb2bf]",
       },
     },
     onUpdate: ({ editor }) => {
@@ -21,9 +21,11 @@ const Editor = ({ onDataChange, content, editable }) => {
   });
 
   return (
-    <div className="w-full z-0">
+    <div className="z-0 w-full">
       {editable && <MenuBar editor={editor} />}
-      <EditorContent editor={editor} />
+      <div className="mt-1 rounded border border-gray-300 p-4">
+        <EditorContent editor={editor} placeholder="Nhập nội dung ..." />
+      </div>
     </div>
   );
 };
