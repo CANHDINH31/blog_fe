@@ -1,5 +1,9 @@
 const Admin = () => {
-  return <div>Admin dashboard</div>;
+  return (
+    <div>
+      <img src="/images/AdminBanner.jpg" alt="banner" />
+    </div>
+  );
 };
 
 export default Admin;
