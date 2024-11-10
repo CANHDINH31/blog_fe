@@ -13,6 +13,7 @@ import Categories from "../pages/admin/screens/categories/Categories";
 import EditCategories from "../pages/admin/screens/categories/EditCategories";
 import Users from "../pages/admin/screens/users/Users";
 import BlogPage from "../pages/blog/BlogPage";
+import ManageDocs from "../pages/admin/screens/docs/ManageDocs";
 
 const routes = [
   { path: "/", element: <HomePage />, index: true },
@@ -29,6 +30,8 @@ const routes = [
       { path: "comments", element: <Comments /> },
       { path: "posts/manage", element: <ManagePosts /> },
       { path: "posts/manage/edit/:slug", element: <EditPost /> },
+      { path: "docs/manage", element: <ManageDocs /> },
+      { path: "docs/manage/edit/:slug", element: <EditPost /> },
       { path: "categories/manage", element: <Categories /> },
       { path: "categories/manage/edit/:slug", element: <EditCategories /> },
       { path: "users/manage", element: <Users /> },

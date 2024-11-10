@@ -33,7 +33,7 @@ const AdminLayout = () => {
 
   if (profileIsLoading) {
     return (
-      <div className="w-full h-screen flex justify-center items-center">
+      <div className="flex h-screen w-full items-center justify-center">
         <h3 className="text-2xl text-slate-700">Loading...</h3>
       </div>
     );
@@ -42,7 +42,7 @@ const AdminLayout = () => {
   return (
     <div className="flex flex-col  lg:flex-row">
       <Header />
-      <main className="bg-[#F9F9F9] flex-1 p-4 lg:p-6">
+      <main className="flex-1 bg-[#F9F9F9] p-4 lg:p-6">
         <Outlet />
       </main>
     </div>

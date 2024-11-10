@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { createPost } from "../../../../services/index/posts";
+import { ImBooks } from "react-icons/im";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +23,24 @@ const Header = () => {
   const windowSize = useWindowSize();
 
   const { mutate: mutateCreatePost, isLoading: isLoadingCreatePost } =
+    useMutation({
+      mutationFn: ({ slug, token }) => {
+        return createPost({
+          token,
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["posts"]);
+        toast.success("Post is created, edit that now!");
+        navigate(`/admin/posts/manage/edit/${data.slug}`);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+        console.log(error);
+      },
+    });
+
+  const { mutate: mutateCreateDoc, isLoading: isLoadingCreateDoc } =
     useMutation({
       mutationFn: ({ slug, token }) => {
         return createPost({
@@ -55,6 +74,10 @@ const Header = () => {
     mutateCreatePost({ token });
   };
 
+  const handleCreateNewDoc = ({ token }) => {
+    mutateCreateDoc({ token });
+  };
+
   return (
     <header className="flex h-fit w-full items-center justify-between p-4 lg:h-full lg:max-w-[300px] lg:flex-col lg:items-start lg:justify-start lg:p-0">
       {/* logo */}
@@ -64,9 +87,9 @@ const Header = () => {
       {/* menu burger icon */}
       <div className="cursor-pointer lg:hidden">
         {isMenuActive ? (
-          <AiOutlineClose className="w-6 h-6" onClick={toggleMenuHandler} />
+          <AiOutlineClose className="h-6 w-6" onClick={toggleMenuHandler} />
         ) : (
-          <AiOutlineMenu className="w-6 h-6" onClick={toggleMenuHandler} />
+          <AiOutlineMenu className="h-6 w-6" onClick={toggleMenuHandler} />
         )}
       </div>
       {/* sidebar container */}
@@ -112,14 +135,33 @@ const Header = () => {
                 <Link to="/admin/posts/manage">Manage all posts</Link>
                 <button
                   disabled={isLoadingCreatePost}
-                  className="text-start disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="text-start disabled:cursor-not-allowed disabled:opacity-60"
                   onClick={() =>
                     handleCreateNewPost({ token: userState.userInfo.token })
                   }
                 >
-                  Add New Post
+                  Add new post
                 </button>
                 <Link to="/admin/categories/manage">Categories</Link>
+              </NavItemCollapse>
+
+              <NavItemCollapse
+                title="Documents"
+                icon={<ImBooks className="text-xl" />}
+                name="docs"
+                activeNavName={activeNavName}
+                setActiveNavName={setActiveNavName}
+              >
+                <Link to="/admin/docs/manage">Manage all docs</Link>
+                <button
+                  disabled={isLoadingCreatePost}
+                  className="text-start disabled:cursor-not-allowed disabled:opacity-60"
+                  onClick={() =>
+                    handleCreateNewDoc({ token: userState.userInfo.token })
+                  }
+                >
+                  Add new doc
+                </button>
               </NavItemCollapse>
 
               <NavItem

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDataTable } from "../../../../hooks/useDataTable";
 import DataTable from "../../components/DataTable";
 
-const ManagePosts = () => {
+const ManageDocs = () => {
   const {
     userState,
     currentPage,
@@ -31,9 +31,9 @@ const ManagePosts = () => {
 
   return (
     <DataTable
-      pageTitle="Manage Posts"
-      dataListName="Posts"
-      searchInputPlaceHolder="Post title..."
+      pageTitle="Manage Docs"
+      dataListName="Docs"
+      searchInputPlaceHolder="Doc title..."
       searchKeywordOnSubmitHandler={submitSearchKeywordHandler}
       searchKeywordOnChangeHandler={searchKeywordHandler}
       searchKeyword={searchKeyword}
@@ -130,4 +130,4 @@ const ManagePosts = () => {
   );
 };
 
-export default ManagePosts;
+export default ManageDocs;
